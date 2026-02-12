@@ -69,10 +69,17 @@ public class Main {
 //      ======================================================================
 //                          Modificación
 //      ======================================================================
-            Empleado empleado4 = manager.find(Empleado.class,1);
-            System.out.println("Empleado 4: "+empleado4.toString());
+//            Empleado empleado4 = manager.find(Empleado.class,1);
+//            System.out.println("Empleado 4: "+empleado4.toString());
+//
+//            empleado4.setNombre("Luis Garcia");
+//            System.out.println("Empleado 4: "+empleado4.toString());
 
-            empleado4.setNombre("Luis Garcia");
+//      ======================================================================
+//                          Remove
+//      ======================================================================
+            Empleado empleado4 = manager.find(Empleado.class,1);
+            manager.remove(empleado4);
             System.out.println("Empleado 4: "+empleado4.toString());
 
             manager.getTransaction().commit();
