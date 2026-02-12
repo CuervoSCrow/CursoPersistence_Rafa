@@ -31,16 +31,27 @@ public class Main {
             manager.getTransaction().begin();
 
 //             Persist
-            Empleado empleado= new Empleado(1,
-                    "Juan Cardillo",
-                    LocalDate.of(1998, Month.JUNE,17),
-                    1458.3);
-//            persist
-            manager.persist(empleado);
-            System.out.println("Empleado 1: "+empleado.toString());
+//            Empleado empleado= new Empleado(1,
+//                    "Juan Cardillo",
+//                    LocalDate.of(1998, Month.JUNE,17),
+//                    1458.3);
+//
+//            manager.persist(empleado);
+//            System.out.println("Empleado 1: "+empleado.toString());
+
+
+//            Operacion find
+            Empleado empleado2 = manager.find(Empleado.class,1);
+            Empleado empleado3 = manager.find(Empleado.class,1);
+            System.out.println("Empleado 2: "+empleado2.toString());
+            System.out.println("Empleado 3: "+empleado3.toString());
+
+            if(empleado2 == empleado3){
+                System.out.println("Empleado 2 y Empleado 3 es el mismo objeto");
+            }
+
             manager.getTransaction().commit();
             System.out.println("Fin de la transacción");
-
         }
 
     }
