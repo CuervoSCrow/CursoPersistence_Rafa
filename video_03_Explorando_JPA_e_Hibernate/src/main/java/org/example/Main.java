@@ -99,19 +99,35 @@ public class Main {
 //            lo que va a pasar es que va a sobrescribir el campo que se encuentra en la BD,
 //            y si no esta en la BD solo lo crea como algo nuevo.
 //      ======================================================================
-            Empleado empleado6 = new Empleado(
-                    1,
-                    "Alexis Peña",
-                    LocalDate.of(1995,Month.JANUARY,7),
-                    1198.9);
-            manager.merge(empleado6);
-            Empleado empleado7 = new Empleado(
-                    2,
-                    "Oscar Alvarez",
-                    LocalDate.of(1992,Month.FEBRUARY,22),
-                    1798.9);
-            manager.merge(empleado7);
+//            Empleado empleado6 = new Empleado(
+//                    1,
+//                    "Alexis Peña",
+//                    LocalDate.of(1995,Month.JANUARY,7),
+//                    1198.9);
+//            manager.merge(empleado6);
+//            Empleado empleado7 = new Empleado(
+//                    2,
+//                    "Oscar Alvarez",
+//                    LocalDate.of(1992,Month.FEBRUARY,22),
+//                    1798.9);
+//            manager.merge(empleado7);
 
+//      ======================================================================
+//                          Flush
+//          Sincronizar el contexto de persistencia con la BD aunque no finaliza la transacción
+//      ======================================================================
+            Empleado empleado8 = new Empleado(
+                    3,
+                    "alberto Gonzales",
+                    LocalDate.of(1990,Month.MAY,25),
+                    1233.7
+            );
+            manager.persist(empleado8);
+            manager.flush();
+//            En la linea se marca una parada para debuguearla y se nota que ya hizo la inserccion
+//            solo que en la BD no se han insertado el flush hace la orden antes del commit,
+//            solo que no lo inserta hasta cuando llega al commit.
+            System.out.println("Empleado 8: "+empleado8.toString());
 
             manager.getTransaction().commit();
             System.out.println("Fin de la transacción");
