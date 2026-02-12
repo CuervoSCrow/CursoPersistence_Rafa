@@ -116,18 +116,43 @@ public class Main {
 //                          Flush
 //          Sincronizar el contexto de persistencia con la BD aunque no finaliza la transacción
 //      ======================================================================
-            Empleado empleado8 = new Empleado(
-                    3,
-                    "alberto Gonzales",
-                    LocalDate.of(1990,Month.MAY,25),
-                    1233.7
-            );
-            manager.persist(empleado8);
-            manager.flush();
+//            Empleado empleado8 = new Empleado(
+//                    3,
+//                    "alberto Gonzales",
+//                    LocalDate.of(1990,Month.MAY,25),
+//                    1233.7
+//            );
+//            manager.persist(empleado8);
+//            manager.flush();
 //            En la linea se marca una parada para debuguearla y se nota que ya hizo la inserccion
 //            solo que en la BD no se han insertado el flush hace la orden antes del commit,
 //            solo que no lo inserta hasta cuando llega al commit.
-            System.out.println("Empleado 8: "+empleado8.toString());
+//            System.out.println("Empleado 8: "+empleado8.toString());
+
+//      ======================================================================
+//                       Clear y Contains
+//      ======================================================================
+//            El Clear es como el detach pero no solo saca un elemento si no a todos los que
+//            que estan en el contexto de persistencia
+//            Contains: me dice si un objeto esta en el contexto de persistencia
+            Empleado empleado9 = manager.find(Empleado.class,1);
+            Empleado empleado10 = manager.find(Empleado.class,3);
+            if(manager.contains(empleado9)){
+                System.out.println("El empleado9 esta en el contexto de persistencia");
+            }else{
+                System.out.println("El empleado 9 no esta en el contexto de persistencia");
+            }
+            manager.clear();
+            if(manager.contains(empleado9)){
+                System.out.println("El empleado9 esta en el contexto de persistencia");
+            }else{
+                System.out.println("El empleado 9 no esta en el contexto de persistencia");
+            }
+            if(manager.contains(empleado10)){
+                System.out.println("El empleado10 esta en el contexto de persistencia");
+            }else{
+                System.out.println("El empleado10 no esta en el contexto de persistencia");
+            }
 
             manager.getTransaction().commit();
             System.out.println("Fin de la transacción");
