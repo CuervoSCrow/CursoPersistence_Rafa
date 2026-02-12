@@ -87,12 +87,30 @@ public class Main {
 //            Sacar a un objeto del contexto de persistencia
 //      ======================================================================
 //        Asegurate que tienes un dato en la base de datos
-            Empleado empleado5 = manager.find(Empleado.class,1);
-            manager.detach(empleado5);
+//            Empleado empleado5 = manager.find(Empleado.class,1);
+//            manager.detach(empleado5);
 //            COn el detach sacamos al empleado 5 cel modelo de persistencia es por eso que me genera
 //            un error al tratar de eliminarlo.
-            manager.remove(empleado5);
+//            manager.remove(empleado5);
 
+//      ======================================================================
+//                          Merge
+//          Nuestro empleado muestra que tiene el mismo id  de uno que esta en la BD,
+//            lo que va a pasar es que va a sobrescribir el campo que se encuentra en la BD,
+//            y si no esta en la BD solo lo crea como algo nuevo.
+//      ======================================================================
+            Empleado empleado6 = new Empleado(
+                    1,
+                    "Alexis Peña",
+                    LocalDate.of(1995,Month.JANUARY,7),
+                    1198.9);
+            manager.merge(empleado6);
+            Empleado empleado7 = new Empleado(
+                    2,
+                    "Oscar Alvarez",
+                    LocalDate.of(1992,Month.FEBRUARY,22),
+                    1798.9);
+            manager.merge(empleado7);
 
 
             manager.getTransaction().commit();
