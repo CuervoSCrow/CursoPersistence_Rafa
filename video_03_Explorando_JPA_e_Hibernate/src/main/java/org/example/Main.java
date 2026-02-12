@@ -41,15 +41,22 @@ public class Main {
 
 
 //            Operacion find
+//            Empleado empleado2 = manager.find(Empleado.class,1);
+//            Empleado empleado3 = manager.find(Empleado.class,1);
+//            System.out.println("Empleado 2: "+empleado2.toString());
+//            System.out.println("Empleado 3: "+empleado3.toString());
+//
+//            if(empleado2 == empleado3){
+//                System.out.println("Empleado 2 y Empleado 3 es el mismo objeto");
+//            }
+
+//            Refresh
             Empleado empleado2 = manager.find(Empleado.class,1);
-            Empleado empleado3 = manager.find(Empleado.class,1);
             System.out.println("Empleado 2: "+empleado2.toString());
-            System.out.println("Empleado 3: "+empleado3.toString());
-
-            if(empleado2 == empleado3){
-                System.out.println("Empleado 2 y Empleado 3 es el mismo objeto");
-            }
-
+            empleado2.setNombre("Luis Garcia");
+            System.out.println("Empleado 2: "+empleado2.toString());
+            manager.refresh(empleado2);
+            System.out.println("Empleado 2: "+empleado2.toString());
             manager.getTransaction().commit();
             System.out.println("Fin de la transacción");
         }
