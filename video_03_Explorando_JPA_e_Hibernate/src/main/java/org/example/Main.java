@@ -51,14 +51,21 @@ public class Main {
 //            }
 
 //            Refresh
-            Empleado empleado2 = manager.find(Empleado.class,1);
-            System.out.println("Empleado 2: "+empleado2.toString());
-            empleado2.setNombre("Luis Garcia");
-            System.out.println("Empleado 2: "+empleado2.toString());
-            manager.refresh(empleado2);
-            System.out.println("Empleado 2: "+empleado2.toString());
-            manager.getTransaction().commit();
-            System.out.println("Fin de la transacción");
+//            Empleado empleado2 = manager.find(Empleado.class,1);
+//            System.out.println("Empleado 2: "+empleado2.toString());
+//            empleado2.setNombre("Luis Garcia");
+//            System.out.println("Empleado 2: "+empleado2.toString());
+//            manager.refresh(empleado2);
+//            System.out.println("Empleado 2: "+empleado2.toString());
+//            manager.getTransaction().commit();
+//            System.out.println("Fin de la transacción");
+
+//      ======================================================================
+                //            getReference
+//            Es un busqueda que no se realiza solo que sea necesario
+//      ======================================================================
+            Empleado empleado4 = manager.getReference(Empleado.class,1);
+            System.out.println("Empleado 4: "+empleado4.toString());
         }
 
     }
