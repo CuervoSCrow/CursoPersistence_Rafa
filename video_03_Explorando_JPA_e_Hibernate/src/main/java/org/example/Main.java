@@ -78,9 +78,22 @@ public class Main {
 //      ======================================================================
 //                          Remove
 //      ======================================================================
-            Empleado empleado4 = manager.find(Empleado.class,1);
-            manager.remove(empleado4);
-            System.out.println("Empleado 4: "+empleado4.toString());
+//            Empleado empleado4 = manager.find(Empleado.class,1);
+//            manager.remove(empleado4);
+//            System.out.println("Empleado 4: "+empleado4.toString());
+
+//      ======================================================================
+//                          Detach
+//            Sacar a un objeto del contexto de persistencia
+//      ======================================================================
+//        Asegurate que tienes un dato en la base de datos
+            Empleado empleado5 = manager.find(Empleado.class,1);
+            manager.detach(empleado5);
+//            COn el detach sacamos al empleado 5 cel modelo de persistencia es por eso que me genera
+//            un error al tratar de eliminarlo.
+            manager.remove(empleado5);
+
+
 
             manager.getTransaction().commit();
             System.out.println("Fin de la transacción");
