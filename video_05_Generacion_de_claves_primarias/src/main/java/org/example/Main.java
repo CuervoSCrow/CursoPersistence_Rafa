@@ -3,6 +3,7 @@ package org.example;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.example.model.Direccion;
 import org.example.model.Empleado;
 
 import javax.swing.text.html.parser.Entity;
@@ -50,7 +51,10 @@ public class Main {
             );
             manager.persist(empleado2);
 
-
+            Direccion direccion1 = new Direccion("Calle 10 #12",
+                                                "Madrid",
+                                                "España");
+            manager.persist(direccion1);
 
             manager.getTransaction().commit();
         }

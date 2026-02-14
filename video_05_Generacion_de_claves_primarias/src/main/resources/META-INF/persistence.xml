@@ -12,6 +12,7 @@
         <!--        Exclude unlisted classes                    -->
         <exclude-unlisted-classes>True</exclude-unlisted-classes>
         <class>org.example.model.Empleado</class>
+        <class>org.example.model.Direccion</class>
 
         <!--        Database connection properties              -->
         <properties>

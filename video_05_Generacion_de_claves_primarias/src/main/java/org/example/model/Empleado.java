@@ -21,12 +21,17 @@ import java.time.LocalDate;
 @NoArgsConstructor @Getter @Setter @AllArgsConstructor
 public class Empleado {
     @Id
+//    1ra Estrategia IDENTITY
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "secuencia_empleado",
-            sequenceName="empleado_secuencia",
-            initialValue = 10,
-            allocationSize = 20)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    2da Estrategia SEQUENCE
+//    @SequenceGenerator(name = "secuencia_empleado",
+//            sequenceName="empleado_secuencia",
+//            initialValue = 10,
+//            allocationSize = 20)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    3ra Estrategia  TABLE
+    @TableGenerator(name = "empleado_seq", table = "tabla_secuencias")
+    @GeneratedValue(strategy = GenerationType.TABLE,generator = "empleado_seq")
     private Integer codigo;
     @Column(name = "nombres",nullable = false,length = 60)
     private String nombre;
