@@ -29,7 +29,7 @@ public class Main {
 
             EntityManager manager = factory.createEntityManager();
             manager.getTransaction().begin();
-            Empleado empleado = new Empleado(
+            Empleado empleado1 = new Empleado(
                     "Pedro Perez",
                     "12345678",
                     "12345678",
@@ -38,8 +38,19 @@ public class Main {
                     2,
                     new BigDecimal("1456.8")
             );
+            manager.persist(empleado1);
+            Empleado empleado2 = new Empleado(
+                    "Juan Luis Vidal",
+                    "87654321",
+                    "87654321",
+                    LocalDate.of(1974,Month.JUNE,5),
+                    0,
+                    2,
+                    new BigDecimal("1546.9")
+            );
+            manager.persist(empleado2);
 
-            manager.persist(empleado);
+
 
             manager.getTransaction().commit();
         }

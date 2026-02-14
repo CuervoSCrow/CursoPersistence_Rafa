@@ -12,14 +12,21 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "empleados",
-        schema = "persistencia",
-        uniqueConstraints = {@UniqueConstraint(name = "telefono-unique",columnNames = {"telefono"})},
-        indexes = {@Index(columnList = "fecha_nacimiento",unique = true)}
+        schema = "public",
+        uniqueConstraints = {@UniqueConstraint(
+                name = "telefono-unique",
+                columnNames = {"telefono"})},
+        indexes = {@Index(columnList = "fecha_nacimiento",unique = false)}
 )
 @NoArgsConstructor @Getter @Setter @AllArgsConstructor
 public class Empleado {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "secuencia_empleado",
+            sequenceName="empleado_secuencia",
+            initialValue = 10,
+            allocationSize = 20)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer codigo;
     @Column(name = "nombres",nullable = false,length = 60)
     private String nombre;
