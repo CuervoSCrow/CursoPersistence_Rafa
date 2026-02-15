@@ -11,8 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class Direccion {
     @Id
-    @TableGenerator(name = "direccion_seq", table = "tabla_secuencias")
-    @GeneratedValue(strategy = GenerationType.TABLE,generator = "direccion_seq")
+//    Estrategia TABLE
+//    @TableGenerator(name = "direccion_seq", table = "tabla_secuencias")
+//    @GeneratedValue(strategy = GenerationType.TABLE,generator = "direccion_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "direccion",

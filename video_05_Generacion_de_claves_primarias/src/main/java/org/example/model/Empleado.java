@@ -30,8 +30,9 @@ public class Empleado {
 //            allocationSize = 20)
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 //    3ra Estrategia  TABLE
-    @TableGenerator(name = "empleado_seq", table = "tabla_secuencias")
-    @GeneratedValue(strategy = GenerationType.TABLE,generator = "empleado_seq")
+//    @TableGenerator(name = "empleado_seq", table = "tabla_secuencias")
+//    @GeneratedValue(strategy = GenerationType.TABLE,generator = "empleado_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer codigo;
     @Column(name = "nombres",nullable = false,length = 60)
     private String nombre;
