@@ -38,7 +38,7 @@ public class Empleado {
     @Column(name="fecha_nacimiento",nullable = false)
     private LocalDate fechaNac;
 
-    @Formula("DATE PART('year',AGE(fecha_nacimiento))")
+    @Formula("DATE_PART('year',AGE(fecha_nacimiento))")
     private int edad;
 
     @Column(name = "tipo_empleado", nullable = false)

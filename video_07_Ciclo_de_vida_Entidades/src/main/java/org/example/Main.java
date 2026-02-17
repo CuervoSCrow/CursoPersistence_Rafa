@@ -38,7 +38,7 @@ public class Main {
             em.getTransaction().begin();
 //
 //            ============================ Estado New ==================================
-            
+/*
             Empleado empleado = new Empleado("Pedro Perez",
                                             "12345678",
                                             "12345678",
@@ -47,11 +47,18 @@ public class Main {
                                             (short) 2,
                                             new BigDecimal("1456.8")
             );
-            estadoEntidad(empleado,em);
-            em.persist(empleado);
-            estadoEntidad(empleado,em);
+*/
 
+//            ============================ Estado Managed ==================================
+
+//            ========================= Ejemplo 1 junto con el new ============
+//            estadoEntidad(empleado,em);
+//            em.persist(empleado);
+//            estadoEntidad(empleado,em);
+//            ================= Ejemplo 2 =====================
+            Empleado empleado = em.find(Empleado.class,1);
             em.getTransaction().commit();
+            estadoEntidad(empleado,em);
         }
     }
 }
