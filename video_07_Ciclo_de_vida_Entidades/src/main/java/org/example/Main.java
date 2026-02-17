@@ -15,11 +15,11 @@ import java.util.Objects;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    private static void estadoEntidad(Empleado empleado,EntityManager em){
+    private static void estadoEntidad(Empleado empleado,EntityManager em,String lugar){
         if(em.contains(empleado)){
-            System.out.println("El empleado esta en el contexto de persistencia");
+            System.out.println("El empleado esta en el contexto de persistencia desde "+lugar);
         }else{
-            System.out.println("El empleado no esta en el contexto de persistencia");
+            System.out.println("El empleado no esta en el contexto de persistencia desde "+lugar);
         }
     }
 
@@ -57,8 +57,21 @@ public class Main {
 //            estadoEntidad(empleado,em);
 //            ================= Ejemplo 2 =====================
             Empleado empleado = em.find(Empleado.class,1);
+
+            estadoEntidad(empleado,em,"Manged");
+
+//            ============================== Estado Detached ==================================
+
+//            ======= Ejemplo 1 =========
+//            em.detach(empleado);
+//            estadoEntidad(empleado,em,"Detached");
+//          ========== Ejemplo 2================
             em.getTransaction().commit();
-            estadoEntidad(empleado,em);
+
+            em.close();
+            em = emf.createEntityManager();
+
+            estadoEntidad(empleado,em,"Detached");
         }
     }
 }
