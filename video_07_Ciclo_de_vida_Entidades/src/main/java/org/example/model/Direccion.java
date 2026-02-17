@@ -1,0 +1,39 @@
+package org.example.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "direcciones")
+@NoArgsConstructor @AllArgsConstructor @Getter @Setter
+public class Direccion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @Column(name="direccion",
+            nullable = false,
+            length = 200)
+    private String direccion;
+
+    @Column(name = "ciudad",
+            nullable = false,
+            length = 20)
+    private String ciudad;
+
+    @Column(name="pais",
+            nullable = false,
+            length = 30)
+    private String pais;
+
+    public Direccion(String direccion,
+                     String ciudad,
+                     String pais) {
+        this.direccion = direccion;
+        this.ciudad = ciudad;
+        this.pais = pais;
+    }
+}
