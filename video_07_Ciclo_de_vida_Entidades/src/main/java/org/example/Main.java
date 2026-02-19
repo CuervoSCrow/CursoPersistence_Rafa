@@ -25,6 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String,String> properties = new HashMap<>();
+        Integer numEmpleado = 252;
         try(EntityManagerFactory emf =
                     Persistence.createEntityManagerFactory(
                             "lab-persistence-unit"
@@ -36,42 +37,69 @@ public class Main {
             }
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+
 //
 //            ============================ Estado New ==================================
 /*
             Empleado empleado = new Empleado("Pedro Perez",
-                                            "12345678",
-                                            "12345678",
+                                            "87654321",
+                                            "87654321",
                                             LocalDate.of(1990, Month.MARCH,17),
                                             0,
                                             (short) 2,
                                             new BigDecimal("1456.8")
             );
+            em.persist(empleado);
+//            em.getTransaction().commit();
 */
 
 //            ============================ Estado Managed ==================================
 
 //            ========================= Ejemplo 1 junto con el new ============
-//            estadoEntidad(empleado,em);
-//            em.persist(empleado);
-//            estadoEntidad(empleado,em);
+/*
+            estadoEntidad(empleado,em,"Managed");
+            em.persist(empleado);
+            estadoEntidad(empleado,em,"Managed");
+*/
+
 //            ================= Ejemplo 2 =====================
-            Empleado empleado = em.find(Empleado.class,1);
+/*
+            Empleado empleado = em.find(Empleado.class,252);
 
             estadoEntidad(empleado,em,"Manged");
 
+*/
+
 //            ============================== Estado Detached ==================================
 
-//            ======= Ejemplo 1 =========
-//            em.detach(empleado);
-//            estadoEntidad(empleado,em,"Detached");
-//          ========== Ejemplo 2================
-            em.getTransaction().commit();
+//            ======= Ejemplo 1 ========
+/*
+            Empleado  empleado = em.find(Empleado.class,numEmpleado);
+            em.detach(empleado);
+            estadoEntidad(empleado,em,"Detached");
+//*/
 
+//          ========== Ejemplo 2================
+/*
+            Empleado empleado = em.find(Empleado.class,numEmpleado);
+            em.getTransaction().commit();
             em.close();
             em = emf.createEntityManager();
 
             estadoEntidad(empleado,em,"Detached");
+*/
+//  ====================== Merge =============================================
+
+//            em.getTransaction().begin();
+            Empleado empleado = em.find(Empleado.class,numEmpleado);
+            empleado.setNombre("Angel Peña");
+            em.merge(empleado);
+            estadoEntidad(empleado,em,"Merge");
+            em.remove(empleado); // Aquí da el error por que esta fuera del estado de persistencia
+//            siempre y cuando este habilitada la liea 67,69
+
+
+            em.getTransaction().commit();
         }
     }
 }
