@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter @Setter @NoArgsConstructor
 public class TargetaSocio {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE) // Solo se comenta en la parte 4.- Mismo Id
     private Integer id;
 
     @Column(nullable = false,length = 20,unique = true)
@@ -39,7 +39,7 @@ public class TargetaSocio {
      */
 
     //    Unidireccional @OneToOne Cuando TargetaSocio es la entidad Padre
-//    /*
+    /*
     @OneToOne(optional = false)
     private Socio socio;
 
@@ -51,8 +51,21 @@ public class TargetaSocio {
         this.socio = socio;
     }
 
-//     */
+     */
 
+//        Parte 4 con el mismo Id
+///*
+     @OneToOne(optional = false)
+     @MapsId
+    private Socio socio;
 
+    public TargetaSocio(String numero,Socio socio) {
+        this.numero = numero;
+        this.miembroDesde = LocalDate.now();
+        this.fechaExpiracion=LocalDate.now().plusYears(3);
+        this.activa=true;
+        this.socio = socio;
+    }
+// */
 
 }

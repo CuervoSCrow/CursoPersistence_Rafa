@@ -41,6 +41,19 @@ public class Socio {
     */
 
     // Unidireccional @OneToOne cuando Targeta Socio es la Entidad Padre
+/*
+    public Socio(String nombre,
+                 String nroDocumento,
+                 LocalDate fechaNac) {
+        this.nombre = nombre;
+        this.nroDocumento = nroDocumento;
+        this.fechaNac = fechaNac;
+    }
+ */
+    // Bidireccional
+/*
+    @OneToOne(mappedBy = "socio")
+    TargetaSocio targetaSocio;
 
     public Socio(String nombre,
                  String nroDocumento,
@@ -49,4 +62,27 @@ public class Socio {
         this.nroDocumento = nroDocumento;
         this.fechaNac = fechaNac;
     }
+
+    @Override
+    public String toString() {
+        return "Socio{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", nroDocumento='" + nroDocumento + '\'' +
+                ", fechaNac=" + fechaNac +
+                ", targetaSocio=" + targetaSocio +
+                '}';
+    }
+
+    */
+
+///*
+    public Socio(String nombre,
+                 String nroDocumento,
+                 LocalDate fechaNac) {
+        this.nombre = nombre;
+        this.nroDocumento = nroDocumento;
+        this.fechaNac = fechaNac;
+    }
+//*/
 }

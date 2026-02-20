@@ -24,7 +24,8 @@ public class Main {
 //                              ONE TO ONE
 //=====================================================================================
 /*
-//            Unidireccional (siendo Socio la Entidad Padre)
+//          1.-  Unidireccional (siendo Socio la Entidad Padre)
+
             TargetaSocio targeta = new TargetaSocio(
                     "ABCD-111-222-333"
             );
@@ -44,8 +45,8 @@ public class Main {
             );
 */
 
-//            Unidireccional (siendo Socio la Entidad Padre)
-///*
+//          2.-  Unidireccional (siendo Socio la Entidad Padre)
+/*
             Socio socio1=new Socio("Pedro Perez",
                     "12345678",
                     LocalDate.of(2000,Month.APRIL,15));
@@ -59,10 +60,92 @@ public class Main {
                     LocalDate.of(2001,Month.JUNE,21));
             em.persist(socio2);
 
-// */
+ */
+
+//          3.-   Bidireccional _ A nivel base de datos no hay bidireccion
+//
+/*
+
+//            Caso 1 , Cuando trato de ver el socio con el To String me da null
+            Socio socio = new Socio(
+                    "Pedro Perez",
+                    "12345678",
+                    LocalDate.of(2000,Month.APRIL,15)
+            );
+            TargetaSocio targetaSocio = new TargetaSocio("ABCD-111-222-333",socio);
+
+            em.persist(socio);
+            em.persist(targetaSocio);
 
 
             em.getTransaction().commit();
+            System.out.println("Socio: "+socio.toString());
+
+ */
+//            Caso 2 .- Asignandole targetaSocio para que la muestra con el toString
+/*
+            Socio socio = new Socio(
+                    "Pedro Perez",
+                    "12345678",
+                    LocalDate.of(2000,Month.APRIL,15)
+            );
+            TargetaSocio targetaSocio = new TargetaSocio("ABCD-111-222-333",socio);
+            socio.setTargetaSocio(targetaSocio);
+
+            em.persist(socio);
+            em.persist(targetaSocio);
+
+
+            em.getTransaction().commit();
+            System.out.println("Socio: "+socio.toString());
+ */
+//
+//            Caso 3.-  Aquí sin la necesidad de agregarlo con el set como anteriormente
+//            cuando se hace la busqueda con el find y asigna la relación desde la BD.
+//            aunque la busqueda que realiza es mucho más grande háce un join para buscar
+//            las dos tablas, se cree que la bidirección da mayor costo en recursos.
+
+/*
+            Socio socio = new Socio(
+                    "Pedro Perez",
+                    "12345678",
+                    LocalDate.of(2000,Month.APRIL,15)
+            );
+            TargetaSocio targetaSocio = new TargetaSocio("ABCD-111-222-333",socio);
+
+
+            em.persist(socio);
+            em.persist(targetaSocio);
+
+
+            em.getTransaction().commit();
+            System.out.println("Socio: "+socio.toString());
+            em.getTransaction().begin();
+            em.clear();
+            socio =null;
+            Socio socio2 = em.find(Socio.class,1);
+            System.out.println("Socio 2: "+socio2.toString());
+            em.getTransaction().commit();
+
+ */
+
+//            4.- Mismo Id para ambas Entidades
+///*
+            Socio socio = new Socio(
+                    "Pedro Perez",
+                    "12345678",
+                    LocalDate.of(2000,Month.APRIL,15)
+            );
+            TargetaSocio targetaSocio = new TargetaSocio("ABCD-111-222-333",socio);
+
+
+            em.persist(socio);
+            em.persist(targetaSocio);
+            em.getTransaction().commit();
+// */
+
+//
+
         }
     }
 }
