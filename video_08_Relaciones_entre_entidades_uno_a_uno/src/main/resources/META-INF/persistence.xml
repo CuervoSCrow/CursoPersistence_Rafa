@@ -11,10 +11,10 @@
 
         <!--        Exclude unlisted classes                    -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>org.example.model.Empleado</class>
-        <class>org.example.model.Direccion</class>
-        <class>org.example.model.LineaFactura1</class>
-        <class>org.example.model.LineaFactura2</class>
+        <class>org.example.entidades.Socio</class>
+        <class>org.example.entidades.TargetaSocio</class>
+<!--        <class>org.example.model.LineaFactura1</class>-->
+<!--        <class>org.example.model.LineaFactura2</class>-->
 
         <!--        Database connection properties              -->
         <properties>
@@ -30,7 +30,7 @@
 
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
 
             <property name="hibernate.connection.provider_class" value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
             <property name="hibernate.hikari.minimumIdle" value="5"/>
