@@ -1,0 +1,51 @@
+package org.example.entidades;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "Alumnos")
+@Getter @Setter @NoArgsConstructor
+public class Alumno {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
+
+    @Column(name = "nombre",length = 50,nullable = false)
+    private String nombre;
+
+    @Column(name = "fecha_nacimiento",nullable = false)
+    private LocalDate fechaNac;
+
+    @Column(name="email", length = 255,nullable = false,unique = true)
+    private String email;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "id_curso")
+    private Curso curso;
+
+    public Alumno(String nombre,
+                  LocalDate fechaNac,
+                  String email,
+                  Curso curso) {
+        this.nombre = nombre;
+        this.fechaNac = fechaNac;
+        this.email = email;
+        this.curso = curso;
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", fechaNac=" + fechaNac +
+                ", email='" + email + '\'' +
+                '}';
+    }
+}
