@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -25,7 +27,9 @@ public class Curso {
     private String profesor;
 
     //    /* Aquí se convierte en un nrelación Bidireccional
-    @OneToMany(mappedBy = "curso",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "curso",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Alumno> alumnos;
 //    */
 

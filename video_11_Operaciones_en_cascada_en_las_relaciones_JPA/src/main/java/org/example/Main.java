@@ -46,13 +46,13 @@ public class Main {
 //            Marca error al no persistir el curos, pero con la anotacion sealiza
 //            la persistencia en cascada
 //            em.persist(curso);
-            /*
+//            /*
 //          Se comenta para ejecutar  caso 2
             em.persist(alumno1);
             em.persist(alumno2);
             em.persist(alumno3);
 
-             */
+//             */
 
 //            Caso 2: La anotacion cascade=CascadeType.PERSIST
 //              La anotación PERSIST en este caso se utiliza en la entidad Curso
@@ -75,6 +75,19 @@ public class Main {
             em.getTransaction().commit();
 
             em.getTransaction().begin();
+
+//            CascadeType.DELETE
+//            Caso 1:
+//            Si se utiliza el remove sin tener en cascadeType crea error
+//            pero el tener cascadeType.REMOVE
+//            Cuando hay muchos datos o relaciones entre tablas pueden tarer problemas
+
+//            Caso 2:
+//            Se elimina CasacadeType.REMOVE y se agrega @OnDelete(action= OnDeleteAction.CASCADE)
+//            da el mismo resultado pero en el codigo sql hace menos instrucciones
+
+            curso = em.find(Curso.class,1);
+            em.remove(curso);
 
             em.getTransaction().commit();
 
