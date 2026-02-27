@@ -60,7 +60,22 @@ public class Main {
             curso.setAlumnos(List.of(alumno1,alumno2,alumno3));
             em.persist(curso);
 
-            
+
+            em.getTransaction().commit();
+
+            em.clear();
+
+//          CascadeType.MERGE
+//            Se utiliza en la clase Curso
+
+            em.getTransaction().begin();
+            alumno2.setNombre("Luis Manuel Vivas");
+            alumno1.setNombre("Pedro Luis Perez");
+            em.merge(curso);
+            em.getTransaction().commit();
+
+            em.getTransaction().begin();
+
             em.getTransaction().commit();
 
         }
