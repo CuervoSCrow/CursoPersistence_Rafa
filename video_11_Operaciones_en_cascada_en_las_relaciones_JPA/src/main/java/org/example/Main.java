@@ -74,8 +74,9 @@ public class Main {
             em.merge(curso);
             em.getTransaction().commit();
 
-            em.getTransaction().begin();
 
+/*
+             em.getTransaction().begin();
 //            CascadeType.DELETE
 //            Caso 1:
 //            Si se utiliza el remove sin tener en cascadeType crea error
@@ -90,6 +91,17 @@ public class Main {
             em.remove(curso);
 
             em.getTransaction().commit();
+
+ */
+//            /*
+//          orphanRemove
+            em.getTransaction().begin();
+
+            curso=em.find(Curso.class,1);
+            curso.getAlumnos().remove(1);
+
+            em.getTransaction().commit();
+//            */
 
         }
     }

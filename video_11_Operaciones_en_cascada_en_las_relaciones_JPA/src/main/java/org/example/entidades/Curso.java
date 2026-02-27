@@ -29,7 +29,8 @@ public class Curso {
     //    /* Aquí se convierte en un nrelación Bidireccional
     @OnDelete(action= OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "curso",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+                       orphanRemoval = true)
     private List<Alumno> alumnos;
 //    */
 
