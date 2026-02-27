@@ -8,6 +8,7 @@ import org.example.entidades.Curso;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -45,11 +46,21 @@ public class Main {
 //            Marca error al no persistir el curos, pero con la anotacion sealiza
 //            la persistencia en cascada
 //            em.persist(curso);
-            em.persist(alumno2);
+            /*
+//          Se comenta para ejecutar  caso 2
             em.persist(alumno1);
+            em.persist(alumno2);
             em.persist(alumno3);
 
+             */
 
+//            Caso 2: La anotacion cascade=CascadeType.PERSIST
+//              La anotación PERSIST en este caso se utiliza en la entidad Curso
+
+            curso.setAlumnos(List.of(alumno1,alumno2,alumno3));
+            em.persist(curso);
+
+            
             em.getTransaction().commit();
 
         }

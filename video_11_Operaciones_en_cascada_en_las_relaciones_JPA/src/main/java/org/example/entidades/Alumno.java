@@ -25,7 +25,7 @@ public class Alumno {
     @Column(name="email",length = 255,nullable = false,unique = true)
     private String email;
 
-    @ManyToOne(optional = true,cascade = CascadeType.PERSIST)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "id_curso")
     private Curso curso;
 

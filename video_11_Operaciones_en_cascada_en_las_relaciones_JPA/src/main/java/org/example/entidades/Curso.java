@@ -25,7 +25,7 @@ public class Curso {
     private String profesor;
 
     //    /* Aquí se convierte en un nrelación Bidireccional
-    @OneToMany(mappedBy = "curso")
+    @OneToMany(mappedBy = "curso",cascade = CascadeType.PERSIST)
     private List<Alumno> alumnos;
 //    */
 
