@@ -30,11 +30,31 @@ public class Estudiante extends Persona {
 
  */
 
-///*
+/*
 //  Estrategia InheritanceType.JOINED
 
 @Entity
 @PrimaryKeyJoinColumn(name = "estudiante_id")
+@Getter @Setter @NoArgsConstructor
+public class Estudiante extends Persona {
+    private String matricula;
+
+    private LocalDate fechaNac;
+
+    public Estudiante(String nombre,
+                      String matricula,
+                      LocalDate fechaNac) {
+        super(nombre);
+        this.matricula = matricula;
+        this.fechaNac = fechaNac;
+    }
+}
+ */
+
+///*
+//  Estrategia InheritanceType.TABLE_PER_CLASS
+
+@Entity
 @Getter @Setter @NoArgsConstructor
 public class Estudiante extends Persona {
     private String matricula;

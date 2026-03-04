@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.entidades.Estudiante;
+import org.example.entidades.Persona;
 import org.example.entidades.Profesor;
 
 import java.time.LocalDate;
@@ -36,6 +37,14 @@ public class Main {
 
 
             em.getTransaction().commit();
+            em.clear();
+
+            em.getTransaction().begin();
+
+            Persona persona = em.find(Persona.class,1L);
+
+            em.getTransaction().commit();
+            System.out.println("Persona: "+persona.toString());
         }
 
     }
