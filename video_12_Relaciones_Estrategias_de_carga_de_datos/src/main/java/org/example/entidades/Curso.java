@@ -29,7 +29,8 @@ public class Curso {
     @OnDelete(action= OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "curso",
                 cascade = {CascadeType.PERSIST,CascadeType.MERGE},
-                orphanRemoval = true)
+                orphanRemoval = true,
+                fetch = FetchType.EAGER)
     private List<Alumno> alumnos;
 
     public Curso(String nombre,int nivel, String profesor) {
