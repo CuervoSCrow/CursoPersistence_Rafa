@@ -46,6 +46,7 @@ public class Persona {
 
  */
 
+/*
 // strategy = InheritanceType.TABLE_PER_CLASS
 //
 
@@ -65,3 +66,24 @@ public class Persona {
     }
 }
 
+ */
+
+///*
+//      @MappedSuperclass
+//
+
+@MappedSuperclass
+@Getter @Setter @NoArgsConstructor
+public class Persona {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    private String nombre;
+
+    public Persona(String nombre) {
+        this.nombre = nombre;
+    }
+}
+
+// */

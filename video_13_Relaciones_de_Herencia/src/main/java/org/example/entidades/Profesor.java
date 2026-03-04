@@ -3,6 +3,7 @@ package org.example.entidades;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,8 +53,9 @@ public class Profesor extends Persona{
 
 ///*
 
-//  Estrategia InheritanceType.TABLE_PER_CLASS
+//  @MappedSuperClass
 @Entity
+@Table(name = "profesores")
 @Getter @Setter @NoArgsConstructor
 public class Profesor extends Persona{
     private String departamento;

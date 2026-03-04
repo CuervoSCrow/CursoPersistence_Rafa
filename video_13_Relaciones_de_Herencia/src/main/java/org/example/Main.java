@@ -39,12 +39,6 @@ public class Main {
             em.getTransaction().commit();
             em.clear();
 
-            em.getTransaction().begin();
-
-            Persona persona = em.find(Persona.class,1L);
-
-            em.getTransaction().commit();
-            System.out.println("Persona: "+persona.toString());
         }
 
     }
