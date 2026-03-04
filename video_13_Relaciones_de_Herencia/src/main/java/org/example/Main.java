@@ -28,7 +28,7 @@ public class Main {
             em.persist(estudiante);
 
             Profesor profesor = new Profesor(
-                    "Ramán Alonso",
+                    "Román Alonso",
                     "Matematicas",
                     "7353709847"
             );
