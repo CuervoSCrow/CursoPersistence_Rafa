@@ -3,8 +3,12 @@ package org.example;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.example.embeddable.FormaContacto;
 import org.example.embeddable.PreferenciasUsuarios;
+import org.example.entidades.Persona;
 import org.example.entidades.Usuario;
+
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -36,6 +40,16 @@ public class Main {
                     new PreferenciasUsuarios("amarillo", "abstracto")
             );
             em.persist(usuario);
+
+            Persona persona = new Persona(
+                    "Oscar Guiterrez",
+                    List.of(
+                            new FormaContacto("Telefono", "123456"),
+                            new FormaContacto("Whatsapp", "123456"),
+                            new FormaContacto("Telegram", "123456")
+                    )
+            );
+            em.persist(persona);
 
             em.getTransaction().commit();
         }

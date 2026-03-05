@@ -12,7 +12,7 @@
         <!--        Exclude unlisted classes                    -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <class>org.example.entidades.Usuario</class>
-<!--        <class>org.example.entidades.Estudiante</class>-->
+        <class>org.example.entidades.Persona</class>
 <!--        <class>org.example.entidades.Profesor</class>-->
         <!--        <class>org.example.entidades.Salon</class>-->
         <!--        <class>org.example.model.LineaFactura2</class>-->
