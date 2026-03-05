@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.logging.Level;
+import org.example.embeddable.PreferenciasUsuarios;
 
 @Entity
 @Table(name = "usuarios")
@@ -34,25 +33,42 @@ public class Usuario {
     @Column(table = "contacto_usuarios",length = 20,nullable = false)
     private String telefono;
 
-    @Column(table="preferencias_usuarios",length = 20,nullable = false)
-    private String color;
+//    @Column(table="PreferenciasUsuarios",length = 20,nullable = false)
+//    private String color;
+//
+//    @Column(table= "PreferenciasUsuarios",length = 20, nullable = false)
+//    private String tema;
 
-    @Column(table= "preferencias_usuarios",length = 20, nullable = false)
-    private String tema;
+    private PreferenciasUsuarios preferenciasUsuarios;
+
+//    public Usuario(String nombre,
+//                   String email,
+//                   String password,
+//                   String direccion,
+//                   String telefono,
+//                   String color,
+//                   String tema) {
+//        this.nombre = nombre;
+//        this.email = email;
+//        this.password = password;
+//        this.direccion = direccion;
+//        this.telefono = telefono;
+//        this.color = color;
+//        this.tema = tema;
+//    }
+
 
     public Usuario(String nombre,
                    String email,
                    String password,
                    String direccion,
                    String telefono,
-                   String color,
-                   String tema) {
+                   PreferenciasUsuarios preferenciasUsuarios) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.color = color;
-        this.tema = tema;
+        this.preferenciasUsuarios = preferenciasUsuarios;
     }
 }

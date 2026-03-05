@@ -3,6 +3,7 @@ package org.example;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.example.embeddable.PreferenciasUsuarios;
 import org.example.entidades.Usuario;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -16,15 +17,24 @@ public class Main {
             EntityManager em = emf.createEntityManager();
 
             em.getTransaction().begin();
+//
+//            Usuario usuario = new Usuario(
+//                    "Pedro Perez",
+//                    "pedro@main.com",
+//                    "1234",
+//                    "Calle 123",
+//                    "123456789",
+//                    "amarillo",
+//                    "abstracto");
 
             Usuario usuario = new Usuario(
                     "Pedro Perez",
-                    "pedro@main.com",
+                    "pedro@mail.com",
                     "1234",
-                    "Calle 123",
-                    "123456789",
-                    "amarillo",
-                    "abstracto");
+                    "Av 16 de septiembre No 38",
+                    "123456",
+                    new PreferenciasUsuarios("amarillo", "abstracto")
+            );
             em.persist(usuario);
 
             em.getTransaction().commit();
