@@ -3,17 +3,17 @@ package org.example;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.example.dto.EstadisticaDTO;
 import org.example.entidades.Alumno;
 import org.example.entidades.Curso;
 import org.example.persistencia.AlumnoDB;
+import org.example.persistencia.CursoDB;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import java.util.Optional;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     private static EntityManager em;
     public static void main(String[] args) {
@@ -21,15 +21,43 @@ public class Main {
                     Persistence.createEntityManagerFactory(
                             "lab-persistence-unit"
                     )){
-            em = emf.createEntityManager();
+            em=emf.createEntityManager();
 
 //            cargaInicial();
+//            parte16();
+            CursoDB cursoDB = new CursoDB(em);
+            cursoDB.getEstadisticaCurso(1);
 
+            EstadisticaDTO estadisticaDTO = cursoDB.getEstadisticaCurso2(1);
+            System.out.println("Estadisticas del curso 1: "+estadisticaDTO.toString());
+            estadisticaDTO=cursoDB.getEstadisticaCurso2(2);
+            System.out.println("Estadisticas del curso 2: "+estadisticaDTO.toString());
 
+            EstadisticaDTO estadisticaDTO1 = cursoDB.getEstadisticaCurso3(1);
+            System.out.println("Estadisticas del curso 1: "+estadisticaDTO1.toString());
+            estadisticaDTO1=cursoDB.getEstadisticaCurso3(2);
+            System.out.println("Estadisticas del curso 2: "+estadisticaDTO1.toString());
 
+            AlumnoDB alumnoDB = new AlumnoDB(em);
+            System.out.println("");
+            System.out.println("***** Pagina 1 de alumnos *****");
+            List<Alumno> alumnos = alumnoDB.findPage(1,12);
+            for(Alumno a : alumnos){
+                System.out.println("Alumno: "+a.toString());
+            }
+            System.out.println("***** Pagina 2 de alumnos *****");
+            alumnos = alumnoDB.findPage(2,12);
+            for(Alumno a : alumnos){
+                System.out.println("Alumno: "+a.toString());
+            }
+            System.out.println("***** Pagina 3 de alumnos *****");
+            alumnos = alumnoDB.findPage(3,12);
+
+            for(Alumno a : alumnos){
+                System.out.println("Alumno: "+a.toString());
+            }
         }
     }
-
     public static void cargaInicial(){
         em.getTransaction().begin();
 
@@ -85,74 +113,76 @@ public class Main {
             return;
         }
         em.getTransaction().commit();
+
     }
-    public static void parte16(){
-
+    private static void parte16(){
         AlumnoDB alumnoDB = new AlumnoDB(em);
-        System.out.println("******* Buscar Todos los registros Forma 1 *******");
-        List<Alumno> alumnos1= alumnoDB.findAll1();
-        for(Alumno a : alumnos1){
+
+        System.out.println("****** Buscar todos los registros findAll_01 ******");
+        List<Alumno> alumnos = alumnoDB.findAll_01();
+        for(Alumno a : alumnos){
             System.out.println("Alumno: "+a.toString());
         }
 
-        System.out.println("************ Busca Todos los Registros Forma 2********");
-
-        List<Alumno> alumnos = alumnoDB.findAll();
-        for (Alumno a : alumnos){
+        System.out.println("****** Bucar todos los registros findAll_02 ******");
+        alumnos = alumnoDB.findAll_02();
+        for(Alumno a : alumnos){
             System.out.println("Alumno: "+a.toString());
         }
 
-        System.out.println("");
-        System.out.println("******* findById *******");
+        System.out.println("****** findById ******");
 
-        System.out.println("Busca el Id 2");
+        System.out.println("Busca el id: 2");
         Optional<Alumno> alumno = alumnoDB.findById(2);
         if(alumno.isPresent()){
             System.out.println("Alumno: "+alumno.toString());
         }
 
-        System.out.println("Busca el Id 50");
+        System.out.println("Busca el id: 50");
         alumno = alumnoDB.findById(50);
         if(alumno.isPresent()){
             System.out.println("Alumno: "+alumno.toString());
         }
 
-        System.out.println("***** findById2 *****");
-        System.out.println("Busca le Id 3");
+        System.out.println("****** findById2 ******");
+        System.out.println("Busca el id: 3");
         alumno = alumnoDB.findById2(3);
         if(alumno.isPresent()){
             System.out.println("Alumno: "+alumno.toString());
         }
 
-        System.out.println("******* findByNombre *****");
-        System.out.println("Busca un nombre que contenga 'sanchez'");
+        System.out.println("****** findByNombre ******");
+        System.out.println("Busca el nombre que contenga 'snachez'");
         alumnos = alumnoDB.findByNombre("sanchez");
-        for(Alumno a :alumnos){
+        for(Alumno a: alumnos){
             System.out.println("Alumno: "+a.toString());
         }
 
-        System.out.println("******* Total de alumnos *****");
-        System.out.println("Numero de alumnos "+alumnoDB.count());
+        System.out.println("****** Total de alumnos ******");
+        System.out.println("Numero de Alumnos: "+alumnoDB.count());
 
-        System.out.println("******** getNoteAVG ************");
-        System.out.println("Promedio del curso 1: "+alumnoDB.getNoteAvg(1));
+        System.out.println("****** getNoteAVG ******");
+        System.out.println("Pormedio del curso 1: "+alumnoDB.getNoteAvg(1));
 
-        System.out.println("******** getNotAVG2 *************");
-        System.out.println("Promedio de curso 1: "+alumnoDB.getNoteAvg2(1));
+        System.out.println("****** getNoteAVG2 ******");
+        System.out.println("****** Usando Stream ******");
+        System.out.println("Promedio del curso 1: "+alumnoDB.getNoteAvg2(1));
 
-        System.out.println("******** Promoción de curso ***********");
+            /*
+            System.out.println("******** Promoción de curso ***********");
 
-        System.out.println("Promocionando los alumos del curso 2 al 3");
-        if(alumnoDB.promocionalAlumnos(2,3)){
-            System.out.println("La promoción se ha realizado correctamente");
-        }else{
-            System.out.println("Ha ocurrido un error realizando la promocion del curso");
-        }
-        System.out.println("Promocionando los alumos del curso 1 al 2");
-        if(alumnoDB.promocionalAlumnos(1,2)){
-            System.out.println("La promoción se ha realizado correctamente");
-        }else{
-            System.out.println("Ha ocurrido un error realizando la promocion del curso");
-        }
+            System.out.println("Promocionando los alumos del curso 2 al 3");
+            if(alumnoDB.promocionalAlumnos(2,3)){
+                System.out.println("La promoción se ha realizado correctamente");
+            }else{
+                System.out.println("Ha ocurrido un error realizando la promocion del curso");
+            }
+            System.out.println("Promocionando los alumos del curso 1 al 2");
+            if(alumnoDB.promocionalAlumnos(1,2)){
+                System.out.println("La promoción se ha realizado correctamente");
+            }else{
+                System.out.println("Ha ocurrido un error realizando la promocion del curso");
+            }
+             */
     }
 }

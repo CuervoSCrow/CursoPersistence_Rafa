@@ -12,16 +12,16 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor
 public class Curso {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombre",length = 50,nullable = false)
+    @Column(name = "nombre", nullable = false,length = 50)
     private String nombre;
 
-    @Column(name = "nivel",nullable = false)
+    @Column(name="nivel", nullable = false)
     private int nivel;
 
-    @Column(name="profesor",length = 50,nullable = false)
+    @Column(name = "profesor",length = 50,nullable = false)
     private String profesor;
 
     @OneToMany(mappedBy = "curso",
@@ -38,7 +38,7 @@ public class Curso {
     }
 
     @Override
-    public String   toString() {
+    public String toString() {
         return "Curso{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
