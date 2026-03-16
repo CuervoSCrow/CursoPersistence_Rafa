@@ -4,6 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+import org.example.dao.AlumnoDAO;
+import org.example.dao.CursoDAO;
+import org.example.dao.impl.AlumnoDAOImpl;
+import org.example.dao.impl.CursoDAOImpl;
 import org.example.dto.EstadisticaDTO;
 import org.example.dto.ResumenAlumnoDTO;
 import org.example.dto.ResumenCursoDTO;
@@ -22,79 +26,33 @@ import java.util.Optional;
 public class Main {
     private static EntityManager em;
     public static void main(String[] args) {
-        try(EntityManagerFactory emf =
+        try(EntityManagerFactory emf=
                     Persistence.createEntityManagerFactory(
                             "lab-persistence-unit"
                     )){
-            em=emf.createEntityManager();
 
-            cargaInicial();
-//            parte16();
-            CursoDB cursoDB = new CursoDB(em);
-            cursoDB.getEstadisticaCurso(1);
+            em = emf.createEntityManager();
 
+//            parte18_2();
+            em.getTransaction().begin();
+            AlumnoDAO alumnoDAO = new AlumnoDAOImpl(em);
 
-            EstadisticaDTO estadisticaDTO = cursoDB.getEstadisticaCurso2(1);
-            System.out.println("Estadisticas del curso 1: "+estadisticaDTO.toString());
-            estadisticaDTO=cursoDB.getEstadisticaCurso2(2);
-            System.out.println("Estadisticas del curso 2: "+estadisticaDTO.toString());
-
-            EstadisticaDTO estadisticaDTO1 = cursoDB.getEstadisticaCurso3(1);
-            System.out.println("Estadisticas del curso 1: "+estadisticaDTO1.toString());
-
-            estadisticaDTO1=cursoDB.getEstadisticaCurso3(2);
-            System.out.println("Estadisticas del curso 2: "+estadisticaDTO1.toString());
-
-            AlumnoDB alumnoDB = new AlumnoDB(em);
-            System.out.println("");
-            System.out.println("***** Pagina 1 de alumnos *****");
-            List<Alumno> alumnos = alumnoDB.findPage(1,12);
-            for(Alumno a : alumnos){
-                System.out.println("Alumno: "+a.toString());
-            }
-            System.out.println("***** Pagina 2 de alumnos *****");
-            alumnos = alumnoDB.findPage(2,12);
-            for(Alumno a : alumnos){
-                System.out.println("Alumno: "+a.toString());
-            }
-            System.out.println("***** Pagina 3 de alumnos *****");
-            alumnos = alumnoDB.findPage(3,12);
-            for(Alumno a : alumnos){
-                System.out.println("Alumno: "+a.toString());
+            List<Alumno> alumnos = alumnoDAO.findAll();
+            for(Alumno a: alumnos){
+                System.out.println("Alumnos: "+a.toString());
             }
 
-            System.out.println("****** Alumnos aprobrados del curso 2");
-            alumnos = alumnoDB.getAlumnosAprobados(2);
-            for(Alumno a : alumnos){
-                System.out.println("Alumno: "+a.toString());
+            CursoDAO cursoDAO = new CursoDAOImpl(em);
+            Optional<Curso> curso=cursoDAO.findById(2);
+            if(curso.isPresent()){
+                System.out.println("Curso: "+curso.toString() );
             }
 
-            System.out.println("Matricula de alumnos ");
-            List<ResumenAlumnoDTO> resumenAlumnos = alumnoDB.getMatriculaAlumnos();
-            for(ResumenAlumnoDTO r : resumenAlumnos){
-                System.out.println("Alumno: "+r.toString());
-            }
+            em.getTransaction().commit();
 
-            System.out.println("Matricula de Cursos ");
-            List<ResumenCursoDTO> resumenCursos = cursoDB.getMatriculaCurso();
-            for(ResumenCursoDTO r : resumenCursos){
-                System.out.println("Curso: "+r.toString());
-            }
-
-            System.out.println("Matricula de total");
-            List<ResumenCursoDTO> resumenCursosTotal = cursoDB.getMatriculaTotal();
-            System.out.println(resumenCursosTotal.toArray().length);
-            for(ResumenCursoDTO r1 : resumenCursosTotal){
-
-                System.out.println("Curso: "+r1.toString());
-            }
-            System.out.println("========================================================");
-
-            System.out.println("");
-
-            problemaQueries();
         }
     }
+
     public static void cargaInicial(){
         em.getTransaction().begin();
 
@@ -263,6 +221,70 @@ public class Main {
         em.getTransaction().commit();
     }
     public static void parte18_2(){
+        cargaInicial();
+//            parte16();
+        CursoDB cursoDB = new CursoDB(em);
+        cursoDB.getEstadisticaCurso(1);
 
+
+        EstadisticaDTO estadisticaDTO = cursoDB.getEstadisticaCurso2(1);
+        System.out.println("Estadisticas del curso 1: "+estadisticaDTO.toString());
+        estadisticaDTO=cursoDB.getEstadisticaCurso2(2);
+        System.out.println("Estadisticas del curso 2: "+estadisticaDTO.toString());
+
+        EstadisticaDTO estadisticaDTO1 = cursoDB.getEstadisticaCurso3(1);
+        System.out.println("Estadisticas del curso 1: "+estadisticaDTO1.toString());
+
+        estadisticaDTO1=cursoDB.getEstadisticaCurso3(2);
+        System.out.println("Estadisticas del curso 2: "+estadisticaDTO1.toString());
+
+        AlumnoDB alumnoDB = new AlumnoDB(em);
+        System.out.println("");
+        System.out.println("***** Pagina 1 de alumnos *****");
+        List<Alumno> alumnos = alumnoDB.findPage(1,12);
+        for(Alumno a : alumnos){
+            System.out.println("Alumno: "+a.toString());
+        }
+        System.out.println("***** Pagina 2 de alumnos *****");
+        alumnos = alumnoDB.findPage(2,12);
+        for(Alumno a : alumnos){
+            System.out.println("Alumno: "+a.toString());
+        }
+        System.out.println("***** Pagina 3 de alumnos *****");
+        alumnos = alumnoDB.findPage(3,12);
+        for(Alumno a : alumnos){
+            System.out.println("Alumno: "+a.toString());
+        }
+
+        System.out.println("****** Alumnos aprobrados del curso 2");
+        alumnos = alumnoDB.getAlumnosAprobados(2);
+        for(Alumno a : alumnos){
+            System.out.println("Alumno: "+a.toString());
+        }
+
+        System.out.println("Matricula de alumnos ");
+        List<ResumenAlumnoDTO> resumenAlumnos = alumnoDB.getMatriculaAlumnos();
+        for(ResumenAlumnoDTO r : resumenAlumnos){
+            System.out.println("Alumno: "+r.toString());
+        }
+
+        System.out.println("Matricula de Cursos ");
+        List<ResumenCursoDTO> resumenCursos = cursoDB.getMatriculaCurso();
+        for(ResumenCursoDTO r : resumenCursos){
+            System.out.println("Curso: "+r.toString());
+        }
+
+        System.out.println("Matricula de total");
+        List<ResumenCursoDTO> resumenCursosTotal = cursoDB.getMatriculaTotal();
+        System.out.println(resumenCursosTotal.toArray().length);
+        for(ResumenCursoDTO r1 : resumenCursosTotal){
+
+            System.out.println("Curso: "+r1.toString());
+        }
+        System.out.println("========================================================");
+
+        System.out.println("");
+
+//        problemaQueries();
     }
 }
