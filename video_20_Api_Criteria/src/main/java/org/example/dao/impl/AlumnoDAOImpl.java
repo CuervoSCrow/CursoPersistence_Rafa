@@ -13,13 +13,13 @@ public class AlumnoDAOImpl implements AlumnoDAO {
     private final EntityManager em;
 
     public AlumnoDAOImpl(EntityManager em) {
-        this.em=em;
+        this.em = em;
     }
 
     @Override
     public List<Alumno> findAll() {
-        String str = "SELECT a FROM Alumno a";
-        TypedQuery<Alumno> query = em.createQuery(str, Alumno.class);
+        String str ="SELECT a FROM Alumno a";
+        TypedQuery<Alumno> query = em.createQuery(str,Alumno.class);
         return query.getResultList();
     }
 
@@ -31,6 +31,7 @@ public class AlumnoDAOImpl implements AlumnoDAO {
     @Override
     public void create(Alumno alumno) {
         em.persist(alumno);
+
     }
 
     @Override
@@ -40,6 +41,6 @@ public class AlumnoDAOImpl implements AlumnoDAO {
 
     @Override
     public void delete(Alumno alumno) {
-        em.remove(alumno    );
+        em.remove(alumno);
     }
 }
