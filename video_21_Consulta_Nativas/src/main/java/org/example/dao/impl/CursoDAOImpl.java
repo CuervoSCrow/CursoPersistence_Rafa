@@ -3,15 +3,12 @@ package org.example.dao.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.example.dao.CursoDAO;
-import org.example.entidades.Alumno;
 import org.example.entidades.Curso;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.List;
 import java.util.Optional;
 
-public class CursoDAOImpl    implements CursoDAO {
-
+public class CursoDAOImpl implements CursoDAO {
     private final EntityManager em;
 
     public CursoDAOImpl(EntityManager em) {
@@ -20,8 +17,8 @@ public class CursoDAOImpl    implements CursoDAO {
 
     @Override
     public List<Curso> findAll() {
-        String str = "SELECT c FROMO Curso c;";
-        TypedQuery query = em.createQuery(str, Curso.class);
+        String str="SELETC c FROM Curso c";
+        TypedQuery<Curso> query = em.createQuery(str,Curso.class);
         return query.getResultList();
     }
 
